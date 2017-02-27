@@ -1,0 +1,26 @@
+.nav-link {
+  display: block;
+
+  margin: 0;
+  padding: 25px;
+
+  font-size: 22px;
+  color: #fff;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $secondary-color;
+  }
+
+  &:active {
+    color: $primary-color;
+  }
+
+  &--active {
+    background-color: #626262;
+
+    &:hover {
+      background-color: #626262;
+    }
+  }
+}
