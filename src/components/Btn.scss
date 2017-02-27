@@ -1,0 +1,35 @@
+.btn {
+  display: inline-block;
+  vertical-align: top;
+
+  min-width: 120px;
+
+  padding: 10px 30px;
+
+  border: 1px solid $primary-color;
+
+  background: $secondary-color;
+
+  outline: none;
+
+  font-size: 22px;
+  line-height: 1;
+  color: #fff;
+  text-decoration: none;
+
+  transition: box-shadow ease-out .2s;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:hover {
+    background: #d4b853;
+
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .4)
+  }
+
+  &:active {
+    color: $primary-color;
+  }
+}
