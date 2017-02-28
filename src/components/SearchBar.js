@@ -3,10 +3,24 @@ import React, { PropTypes } from 'react';
 import Btn from './Btn';
 
 export default function SearchBar(props) {
+  function handleChange(e) {
+    const inputName = props.inputName;
+    const inputValue = e.target.value;
+
+    props.onChange(inputName, inputValue);
+  }
+
   function handleEnterKey(e) {
     if (e.keyCode === 13) {
-      props.handleSearch();
+      handleSearch();
     }
+  }
+
+  function handleSearch() {
+    const { inputName, inputValue, onChange, search } = props;
+
+    search(inputValue);
+    onChange(inputName, '');
   }
 
   return (
@@ -14,11 +28,12 @@ export default function SearchBar(props) {
       <input
         className="search-bar__input"
         type="text"
-        onChange={props.handleChange}
+        value={props.inputValue}
+        onChange={handleChange}
         onKeyDown={handleEnterKey}
       />
       <Btn
-        handleClick={props.handleSearch}
+        handleClick={handleSearch}
         text={'Search'}
       />
     </div>
@@ -26,6 +41,13 @@ export default function SearchBar(props) {
 }
 
 SearchBar.propTypes = {
-  handleChange: PropTypes.func.isRequired,
-  handleSearch: PropTypes.func.isRequired,
+  inputName: PropTypes.string,
+  inputValue: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  search: PropTypes.func.isRequired,
+};
+
+SearchBar.defaultProps = {
+  inputName: '',
+  inputValue: '',
 };
