@@ -1,7 +1,10 @@
 const defaultState = {
+  currentPage: 1,
   isFetching: false,
+  lastQuery: '',
   movies: [],
   searchInput: '',
+  totalResults: 0,
 };
 
 export default function search(state = defaultState, action) {
@@ -15,11 +18,19 @@ export default function search(state = defaultState, action) {
         isFetching: false,
       });
     case 'RECEIVE_MOVIES': {
-      const movies = action.movies || [];
+      const { movies, page, query, totalResults } = action;
+      let newMovies = movies || [];
+
+      if (page !== 1) {
+        newMovies = state.movies.concat(movies);
+      }
 
       return Object.assign({}, state, {
+        currentPage: page,
         isFetching: false,
-        movies,
+        lastQuery: query,
+        movies: newMovies,
+        totalResults: +totalResults,
       });
     }
     case 'SET_INPUT_VALUE': {
@@ -27,7 +38,6 @@ export default function search(state = defaultState, action) {
       if (!(inputName in state)) return state;
       return Object.assign({}, state, { [inputName]: value });
     }
-
     default:
       return state;
   }

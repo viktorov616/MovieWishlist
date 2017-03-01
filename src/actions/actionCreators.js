@@ -1,16 +1,16 @@
 import fetch from 'isomorphic-fetch';
 
-export function fetchMovies(query) {
+export function fetchMovies(query, page = 1) {
   return function (dispatch) {
     dispatch(requestData());
 
-    return fetch(`http://www.omdbapi.com/?s=${query}`)
+    return fetch(`http://www.omdbapi.com/?s=${query}&page=${page}`)
       .then((response) => {
         if (response.ok) {
           response.json()
             .then((json) => {
               dispatch(receiveResponse());
-              dispatch(receiveMovies(json));
+              dispatch(receiveMovies(json, query, page));
             });
         } else {
           dispatch(receiveResponse());
@@ -20,10 +20,13 @@ export function fetchMovies(query) {
   };
 }
 
-function receiveMovies(json) {
+function receiveMovies(json, query, page) {
   return {
     type: 'RECEIVE_MOVIES',
     movies: json.Search,
+    query,
+    page,
+    totalResults: json.totalResults,
   };
 }
 
