@@ -44,4 +44,10 @@
   &__prop-name {
     font-weight: 700;
   }
+
+  &__controls {
+    display: flex;
+    
+    width: 100%;
+  }
 }

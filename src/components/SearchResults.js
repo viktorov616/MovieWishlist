@@ -7,6 +7,8 @@ export default function SearchResults(props) {
     <ul className="search-results">
       { props.movies.map(movie => (<Movie
         key={movie.imdbID}
+        fetchMovie={props.fetchMovie}
+        openMoviePopup={props.openMoviePopup}
         {...movie}
       />)) }
     </ul>
@@ -14,5 +16,7 @@ export default function SearchResults(props) {
 }
 
 SearchResults.propTypes = {
+  fetchMovie: PropTypes.func.isRequired,
   movies: PropTypes.array.isRequired,
+  openMoviePopup: PropTypes.func.isRequired,
 };

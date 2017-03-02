@@ -1,5 +1,11 @@
 import fetch from 'isomorphic-fetch';
 
+export function closeMoviePopup() {
+  return {
+    type: 'CLOSE_MOVIE_POPUP',
+  };
+}
+
 export function fetchMovies(query, page = 1) {
   return function (dispatch) {
     dispatch(requestData());
@@ -20,6 +26,32 @@ export function fetchMovies(query, page = 1) {
   };
 }
 
+export function fetchMovie(id) {
+  return function (dispatch) {
+    dispatch(requestData());
+
+    return fetch(`http://www.omdbapi.com/?i=${id}`)
+      .then((response) => {
+        if (response.ok) {
+          response.json()
+            .then((json) => {
+              dispatch(receiveResponse());
+              dispatch(receiveMovie(json));
+            });
+        } else {
+          dispatch(receiveResponse());
+          // add error handler later
+        }
+      });
+  };
+}
+
+export function openMoviePopup() {
+  return {
+    type: 'OPEN_MOVIE_POPUP',
+  };
+}
+
 function receiveMovies(json, query, page) {
   return {
     type: 'RECEIVE_MOVIES',
@@ -27,6 +59,13 @@ function receiveMovies(json, query, page) {
     query,
     page,
     totalResults: json.totalResults,
+  };
+}
+
+function receiveMovie(json) {
+  return {
+    type: 'RECEIVE_MOVIE',
+    movie: json,
   };
 }
 

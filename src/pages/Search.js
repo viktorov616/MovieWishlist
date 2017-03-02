@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import Btn from '../components/Btn';
+import MoviePopup from '../components/MoviePopup';
 import SearchBar from '../components/SearchBar';
 import SearchResults from '../components/SearchResults';
 
@@ -12,12 +13,19 @@ export default function Search(props) {
     props.fetchMovies(query, page);
   }
 
-  const movieAmount = props.search.movies.length;
-  const loadMoreBtn = (movieAmount !== 0 && props.search.totalResults - movieAmount > 0)
+  const { displayMoviePopup, isFetching, movies, movie, totalResults } = props.search;
+  const movieAmount = movies.length;
+  const loadMoreBtn = (movieAmount !== 0 && totalResults - movieAmount > 0)
     ? (<Btn
       handleClick={handleLoadMore}
       text={'Load more'}
     />) : null;
+  const moviePopup = (displayMoviePopup && !isFetching)
+    ? (<MoviePopup
+      closeMoviePopup={props.closeMoviePopup}
+      {...movie}
+    />) : null;
+
   return (
     <div className="search">
       <SearchBar
@@ -27,16 +35,22 @@ export default function Search(props) {
         search={props.fetchMovies}
       />
       <SearchResults
+        fetchMovie={props.fetchMovie}
         movies={props.search.movies}
+        openMoviePopup={props.openMoviePopup}
       />
       { loadMoreBtn }
+      { moviePopup }
     </div>
   );
 }
 
 Search.propTypes = {
+  closeMoviePopup: PropTypes.func,
   fetchMovies: PropTypes.func,
-
+  fetchMovie: PropTypes.func,
+  isFetching: PropTypes.bool,
+  openMoviePopup: PropTypes.func,
   search: PropTypes.shape({
     currentPage: PropTypes.number,
     lastQuery: PropTypes.string,
@@ -48,7 +62,11 @@ Search.propTypes = {
 };
 
 Search.defaultProps = {
+  closeMoviePopup: () => {},
   fetchMovies: () => {},
+  fetchMovie: () => {},
+  isFetching: false,
+  openMoviePopup: () => {},
   search: {
     currentPage: 1,
     lastQuery: '',
