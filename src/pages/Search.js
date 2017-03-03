@@ -13,17 +13,18 @@ export default function Search(props) {
     props.fetchMovies(query, page);
   }
 
-  const { displayMoviePopup, isFetching, movies, movie, totalResults } = props.search;
+  const { displayMoviePopup, movies, movie, totalResults } = props.search;
   const movieAmount = movies.length;
   const loadMoreBtn = (movieAmount !== 0 && totalResults - movieAmount > 0)
     ? (<Btn
-      handleClick={handleLoadMore}
+      onClick={handleLoadMore}
       text={'Load more'}
     />) : null;
-  const moviePopup = (displayMoviePopup && !isFetching)
+  const moviePopup = (displayMoviePopup)
     ? (<MoviePopup
+      addToWishlist={props.handleAddToWishlist}
       closeMoviePopup={props.closeMoviePopup}
-      {...movie}
+      movie={movie}
     />) : null;
 
   return (
@@ -35,9 +36,9 @@ export default function Search(props) {
         search={props.fetchMovies}
       />
       <SearchResults
-        fetchMovie={props.fetchMovie}
+        addToWishlist={props.handleAddToWishlist}
+        openMoviePopup={props.handleOpenMoviePopup}
         movies={props.search.movies}
-        openMoviePopup={props.openMoviePopup}
       />
       { loadMoreBtn }
       { moviePopup }
@@ -48,9 +49,8 @@ export default function Search(props) {
 Search.propTypes = {
   closeMoviePopup: PropTypes.func,
   fetchMovies: PropTypes.func,
-  fetchMovie: PropTypes.func,
-  isFetching: PropTypes.bool,
-  openMoviePopup: PropTypes.func,
+  handleAddToWishlist: PropTypes.func,
+  handleOpenMoviePopup: PropTypes.func,
   search: PropTypes.shape({
     currentPage: PropTypes.number,
     lastQuery: PropTypes.string,
@@ -65,8 +65,8 @@ Search.defaultProps = {
   closeMoviePopup: () => {},
   fetchMovies: () => {},
   fetchMovie: () => {},
-  isFetching: false,
-  openMoviePopup: () => {},
+  handleAddToWishlist: () => {},
+  handleOpenMoviePopup: () => {},
   search: {
     currentPage: 1,
     lastQuery: '',

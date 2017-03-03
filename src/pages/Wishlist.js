@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-export default function Wishlist() {
+import MovieList from '../components/MovieList';
+
+export default function Wishlist(props) {
   return (
-    <div className="search">Wishlist page</div>
+    <div className="wishlist">
+      <MovieList
+        deleteFromWishlist={props.deleteFromWishlist}
+        movies={props.wishlist.movies}
+      />
+    </div>
   );
 }
+
+Wishlist.propTypes = {
+  deleteFromWishlist: PropTypes.func,
+  wishlist: PropTypes.shape({
+    movies: PropTypes.array,
+  }),
+};
+
+Wishlist.defaultProps = {
+  deleteFromWishlist: () => {},
+  wishlist: {
+    movies: [],
+  },
+};

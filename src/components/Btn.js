@@ -8,7 +8,7 @@ export default function Btn(props) {
 
   return (
     <button
-      onClick={props.handleClick}
+      onClick={props.onClick}
       className={btnClass}
     >
       { props.text }
@@ -17,7 +17,7 @@ export default function Btn(props) {
 }
 
 Btn.propTypes = {
-  handleClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
   mods: PropTypes.array,
 };

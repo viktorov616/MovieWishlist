@@ -7,16 +7,16 @@ export default function SearchResults(props) {
     <ul className="search-results">
       { props.movies.map(movie => (<Movie
         key={movie.imdbID}
-        fetchMovie={props.fetchMovie}
+        addToWishlist={props.addToWishlist}
+        movie={movie}
         openMoviePopup={props.openMoviePopup}
-        {...movie}
       />)) }
     </ul>
   );
 }
 
 SearchResults.propTypes = {
-  fetchMovie: PropTypes.func.isRequired,
+  addToWishlist: PropTypes.func.isRequired,
   movies: PropTypes.array.isRequired,
   openMoviePopup: PropTypes.func.isRequired,
 };

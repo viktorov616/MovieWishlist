@@ -1,13 +1,27 @@
 import fetch from 'isomorphic-fetch';
 
+function addToWishlist(movie) {
+  return {
+    type: 'ADD_TO_WISHLIST',
+    movie,
+  };
+}
+
 export function closeMoviePopup() {
   return {
     type: 'CLOSE_MOVIE_POPUP',
   };
 }
 
+export function deleteFromWishlist(id) {
+  return {
+    type: 'DELETE_FROM_WISHLIST',
+    id,
+  };
+}
+
 export function fetchMovies(query, page = 1) {
-  return function (dispatch) {
+  return (dispatch) => {
     dispatch(requestData());
 
     return fetch(`http://www.omdbapi.com/?s=${query}&page=${page}`)
@@ -26,17 +40,17 @@ export function fetchMovies(query, page = 1) {
   };
 }
 
-export function fetchMovie(id) {
-  return function (dispatch) {
+function fetchMovie(id, ...functions) {
+  return (dispatch) => {
     dispatch(requestData());
 
-    return fetch(`http://www.omdbapi.com/?i=${id}`)
+    return fetch(`http://www.omdbapi.com/?i=${id}&plot=full`)
       .then((response) => {
         if (response.ok) {
           response.json()
             .then((json) => {
               dispatch(receiveResponse());
-              dispatch(receiveMovie(json));
+              functions.map(f => dispatch(f(json)));
             });
         } else {
           dispatch(receiveResponse());
@@ -46,7 +60,19 @@ export function fetchMovie(id) {
   };
 }
 
-export function openMoviePopup() {
+export function handleAddToWishlist(id) {
+  return (dispatch) => {
+    dispatch(fetchMovie(id, addToWishlist));
+  };
+}
+
+export function handleOpenMoviePopup(id) {
+  return (dispatch) => {
+    dispatch(fetchMovie(id, receiveMovie, openMoviePopup));
+  };
+}
+
+function openMoviePopup() {
   return {
     type: 'OPEN_MOVIE_POPUP',
   };

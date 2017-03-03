@@ -32,4 +32,12 @@
   &:active {
     color: $primary-color;
   }
+
+  &--small {
+    min-width: 80px;
+
+    padding: 5px 15px;
+
+    font-size: 14px;
+  }
 }

@@ -33,7 +33,7 @@ export default function SearchBar(props) {
         onKeyDown={handleEnterKey}
       />
       <Btn
-        handleClick={handleSearch}
+        onClick={handleSearch}
         text={'Search'}
       />
     </div>

@@ -1,0 +1,88 @@
+.movie-extended-info {
+  display: flex;
+
+  width: 100%;
+
+  &__poster {
+    flex: 0 0 300px;
+
+    max-width: 300px;
+    height: 400px;
+  }
+
+  &__desc {
+    display: flex;
+    flex-wrap: wrap;
+
+    padding: 0 10px;
+  }
+
+  &__title {
+    width: 100%;
+
+    font-size: 18px;
+
+    margin: 0;
+  }
+
+  &__genre {
+    width: 100%;
+
+    margin-top: 0;
+
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  &__duration {
+    width: 100%;
+
+    margin-bottom: 0;
+  }
+
+  &__release {
+    width: 100%;
+
+    margin-bottom: 0;
+  }
+
+  &__plot {
+    width: 100%;
+  }
+
+  &__rating {
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 100%;
+
+    margin-bottom: 0;
+  }
+
+  &__director {
+    width: 100%;
+
+    margin-bottom: 0;
+  }
+
+  &__actors {
+    width: 100%;
+
+    margin-bottom: 0;
+  }
+
+  &__metascore {
+    margin-right: 10px;
+    margin-bottom: 0;
+  }
+
+  &__imdb-rating {
+    margin-bottom: 0;
+  }
+
+  &__controls {
+    width: 100%;
+
+    text-align: center;
+  }
+}
