@@ -114,3 +114,10 @@ export function setInputValue(inputName, value) {
     value,
   };
 }
+
+export function toggleMovie(i) {
+  return {
+    type: 'TOGGLE_MOVIE',
+    i,
+  };
+}

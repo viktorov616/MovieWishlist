@@ -7,4 +7,22 @@
   border: 1px solid $primary-color;
 
   list-style: none;
+
+  &--watched {
+    background: rgba(179, 179, 179, .3);
+
+    &:after {
+      content: 'Watched';
+
+      position: absolute;
+      right: 5px;
+      top: 38px;
+
+      transform: rotate(30deg);
+
+      font-size: 38px;
+      font-weight: 700;
+      color: $secondary-color;
+    }
+  }
 }

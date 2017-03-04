@@ -1,17 +1,20 @@
 import React, { PropTypes } from 'react';
+import classNames from 'classnames';
 
 import Btn from './Btn';
 import MovieExtendedInfo from './MovieExtendedInfo';
 
 export default function WishlistMovie(props) {
-  const id = props.movie.imdbID;
+  const { imdbID: id, watched } = props.movie;
   const handleDeleteFromWishlist = props.deleteFromWishlist.bind(null, id);
+  const handleToggleMovie = props.toggleMovie.bind(null, id);
+  const movieClass = classNames('wishlist-movie', { 'wishlist-movie--watched': watched });
 
   return (
-    <li className="wishlist-movie">
+    <li className={movieClass}>
       <MovieExtendedInfo {...props.movie}>
         <Btn
-          onClick={() => {}}
+          onClick={handleToggleMovie}
           text={'Mark as watched'}
         />
         <Btn
@@ -26,4 +29,5 @@ export default function WishlistMovie(props) {
 WishlistMovie.propTypes = {
   deleteFromWishlist: PropTypes.func.isRequired,
   movie: PropTypes.object.isRequired,
+  toggleMovie: PropTypes.func.isRequired,
 };

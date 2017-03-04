@@ -8,6 +8,7 @@ export default function Wishlist(props) {
       <MovieList
         deleteFromWishlist={props.deleteFromWishlist}
         movies={props.wishlist.movies}
+        toggleMovie={props.toggleMovie}
       />
     </div>
   );
@@ -15,6 +16,7 @@ export default function Wishlist(props) {
 
 Wishlist.propTypes = {
   deleteFromWishlist: PropTypes.func,
+  toggleMovie: PropTypes.func,
   wishlist: PropTypes.shape({
     movies: PropTypes.array,
   }),
@@ -22,6 +24,7 @@ Wishlist.propTypes = {
 
 Wishlist.defaultProps = {
   deleteFromWishlist: () => {},
+  toggleMovie: () => {},
   wishlist: {
     movies: [],
   },
