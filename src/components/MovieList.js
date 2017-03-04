@@ -12,7 +12,7 @@ export default function MovieList(props) {
     <ul className="movie-list">
       { props.movies.map(movie => (<WishlistMovie
         key={movie.imdbID}
-        deleteFromWishlist={props.deleteFromWishlist}
+        removeFromWishlist={props.removeFromWishlist}
         movie={movie}
         toggleMovie={handleToggleMovie}
       />)) }
@@ -21,7 +21,7 @@ export default function MovieList(props) {
 }
 
 MovieList.propTypes = {
-  deleteFromWishlist: PropTypes.func.isRequired,
+  removeFromWishlist: PropTypes.func.isRequired,
   movies: PropTypes.array.isRequired,
   toggleMovie: PropTypes.func.isRequired,
 };

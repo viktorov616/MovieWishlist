@@ -9,8 +9,20 @@ export default function MoviePopup(props) {
     e.preventDefault();
   }
 
-  const id = props.movie.imdbID;
+  const { movie, wishlistMovies } = props;
+  const id = movie.imdbID;
+  const isInWishlist = wishlistMovies.some(wishlistMovie => wishlistMovie.imdbID === id);
   const handleAddToWishlist = props.addToWishlist.bind(null, id);
+  const handleRemoveFromWishlist = props.removeFromWishlist.bind(null, id);
+  const addOrRemoveBtn = (isInWishlist)
+    ? (<Btn
+      onClick={handleRemoveFromWishlist}
+      text={'Remove from wishlist'}
+    />)
+    : (<Btn
+      onClick={handleAddToWishlist}
+      text={'Add to wishlist'}
+    />);
 
   return (
     <Form
@@ -19,10 +31,7 @@ export default function MoviePopup(props) {
       handleSubmit={handleSubmit}
     >
       <MovieExtendedInfo {...props.movie}>
-        <Btn
-          onClick={handleAddToWishlist}
-          text={'Add to wishlist'}
-        />
+        { addOrRemoveBtn }
       </MovieExtendedInfo>
     </Form>
   );
@@ -32,4 +41,6 @@ MoviePopup.propTypes = {
   addToWishlist: PropTypes.func.isRequired,
   closeMoviePopup: PropTypes.func.isRequired,
   movie: PropTypes.object.isRequired,
+  removeFromWishlist: PropTypes.func.isRequired,
+  wishlistMovies: PropTypes.array.isRequired,
 };

@@ -13,13 +13,6 @@ export function closeMoviePopup() {
   };
 }
 
-export function deleteFromWishlist(id) {
-  return {
-    type: 'DELETE_FROM_WISHLIST',
-    id,
-  };
-}
-
 export function fetchMovies(query, page = 1) {
   return (dispatch) => {
     dispatch(requestData());
@@ -98,6 +91,13 @@ function receiveMovie(json) {
 function receiveResponse() {
   return {
     type: 'RECEIVE_RESPONSE',
+  };
+}
+
+export function removeFromWishlist(id) {
+  return {
+    type: 'REMOVE_FROM_WISHLIST',
+    id,
   };
 }
 

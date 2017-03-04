@@ -25,6 +25,8 @@ export default function Search(props) {
       addToWishlist={props.handleAddToWishlist}
       closeMoviePopup={props.closeMoviePopup}
       movie={movie}
+      removeFromWishlist={props.removeFromWishlist}
+      wishlistMovies={props.wishlist.movies}
     />) : null;
 
   return (
@@ -37,8 +39,10 @@ export default function Search(props) {
       />
       <SearchResults
         addToWishlist={props.handleAddToWishlist}
-        openMoviePopup={props.handleOpenMoviePopup}
         movies={props.search.movies}
+        openMoviePopup={props.handleOpenMoviePopup}
+        removeFromWishlist={props.removeFromWishlist}
+        wishlistMovies={props.wishlist.movies}
       />
       { loadMoreBtn }
       { moviePopup }
@@ -51,6 +55,7 @@ Search.propTypes = {
   fetchMovies: PropTypes.func,
   handleAddToWishlist: PropTypes.func,
   handleOpenMoviePopup: PropTypes.func,
+  removeFromWishlist: PropTypes.func,
   search: PropTypes.shape({
     currentPage: PropTypes.number,
     lastQuery: PropTypes.string,
@@ -59,6 +64,9 @@ Search.propTypes = {
     totalResults: PropTypes.number,
   }),
   setInputValue: PropTypes.func,
+  wishlist: PropTypes.shape({
+    movies: PropTypes.array,
+  }),
 };
 
 Search.defaultProps = {
@@ -67,6 +75,7 @@ Search.defaultProps = {
   fetchMovie: () => {},
   handleAddToWishlist: () => {},
   handleOpenMoviePopup: () => {},
+  removeFromWishlist: () => {},
   search: {
     currentPage: 1,
     lastQuery: '',
@@ -75,4 +84,7 @@ Search.defaultProps = {
     totalResults: 0,
   },
   setInputValue: () => {},
+  wishlist: {
+    movies: [],
+  },
 };

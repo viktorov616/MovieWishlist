@@ -12,7 +12,7 @@ export default function wishlist(state = defaultState, action) {
 
       return Object.assign({}, state, { movies: newMovies });
     }
-    case 'DELETE_FROM_WISHLIST': {
+    case 'REMOVE_FROM_WISHLIST': {
       const newMovies = state.movies.filter(movie => movie.imdbID !== action.id);
       localStorage.setItem('movies', JSON.stringify(newMovies));
 

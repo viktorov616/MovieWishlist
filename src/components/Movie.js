@@ -4,10 +4,31 @@ import Btn from './Btn';
 import MovieInfo from './MovieInfo';
 
 export default function Movie(props) {
-  const { movie } = props;
+  function handleAddToWishlist() {
+    const isInWishlist = wishlistMovies.some(wishlistMovie => wishlistMovie.imdbID === id);
+    if (isInWishlist) {
+      return;
+    }
+
+    props.addToWishlist(id);
+  }
+
+  const { movie, wishlistMovies } = props;
   const id = movie.imdbID;
-  const handleAddToWishlist = props.addToWishlist.bind(null, id);
+  const isInWishlist = wishlistMovies.some(wishlistMovie => wishlistMovie.imdbID === id);
   const handleOpenMoviePopup = props.openMoviePopup.bind(null, id);
+  const handleRemoveFromWishlist = props.removeFromWishlist.bind(null, id);
+  const addOrRemoveBtn = (isInWishlist)
+    ? (<Btn
+      onClick={handleRemoveFromWishlist}
+      text={'Remove from wishlist'}
+      mods={['small']}
+    />)
+    : (<Btn
+      onClick={handleAddToWishlist}
+      text={'Add to wishlist'}
+      mods={['small']}
+    />);
 
   return (
     <li className="movie">
@@ -17,11 +38,7 @@ export default function Movie(props) {
           text={'More info'}
           mods={['small']}
         />
-        <Btn
-          onClick={handleAddToWishlist}
-          text={'Add to wishlist'}
-          mods={['small']}
-        />
+        { addOrRemoveBtn }
       </MovieInfo>
     </li>
   );
@@ -33,4 +50,6 @@ Movie.propTypes = {
     imdbID: PropTypes.string.isRequired,
   }).isRequired,
   openMoviePopup: PropTypes.func.isRequired,
+  removeFromWishlist: PropTypes.func.isRequired,
+  wishlistMovies: PropTypes.array.isRequired,
 };

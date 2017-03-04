@@ -10,6 +10,8 @@ export default function SearchResults(props) {
         addToWishlist={props.addToWishlist}
         movie={movie}
         openMoviePopup={props.openMoviePopup}
+        removeFromWishlist={props.removeFromWishlist}
+        wishlistMovies={props.wishlistMovies}
       />)) }
     </ul>
   );
@@ -19,4 +21,6 @@ SearchResults.propTypes = {
   addToWishlist: PropTypes.func.isRequired,
   movies: PropTypes.array.isRequired,
   openMoviePopup: PropTypes.func.isRequired,
+  removeFromWishlist: PropTypes.func.isRequired,
+  wishlistMovies: PropTypes.array.isRequired,
 };
