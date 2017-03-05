@@ -2,6 +2,11 @@ import React, { PropTypes } from 'react';
 
 export default function MovieExtendedInfo(props) {
   const poster = (props.Poster === 'N/A') ? require('../img/no-poster.jpg') : props.Poster;
+  const additionalInfo = (props.additionalInfo !== null)
+    ? (<p className="movie-extended-info__additional">
+      {props.additionalInfo}
+    </p>)
+    : null;
 
   return (
     <div className="movie-extended-info">
@@ -18,6 +23,7 @@ export default function MovieExtendedInfo(props) {
         <p className="movie-extended-info__director">Director: {props.Director}</p>
         <p className="movie-extended-info__actors">Actors: {props.Actors}</p>
         <p className="movie-extended-info__plot">{props.Plot}</p>
+        { additionalInfo }
         <div className="movie-extended-info__controls">
           { props.children }
         </div>
@@ -36,11 +42,13 @@ MovieExtendedInfo.propTypes = {
   Director: PropTypes.string.isRequired,
   Actors: PropTypes.string.isRequired,
   Plot: PropTypes.string.isRequired,
+  additionalInfo: PropTypes.string,
   children: PropTypes.node,
   imdbID: PropTypes.string.isRequired,
   imdbRating: PropTypes.string.isRequired,
 };
 
 MovieExtendedInfo.defaultProps = {
+  additionalInfo: '',
   children: null,
 };

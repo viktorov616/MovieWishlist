@@ -12,22 +12,18 @@
 
   &__desc {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
 
     padding: 0 10px;
   }
 
   &__title {
-    width: 100%;
-
     font-size: 18px;
 
     margin: 0;
   }
 
   &__genre {
-    width: 100%;
-
     margin-top: 0;
 
     font-weight: 300;
@@ -35,39 +31,25 @@
   }
 
   &__duration {
-    width: 100%;
-
     margin-bottom: 0;
   }
 
   &__release {
-    width: 100%;
-
     margin-bottom: 0;
-  }
-
-  &__plot {
-    width: 100%;
   }
 
   &__rating {
     display: flex;
     flex-wrap: wrap;
 
-    width: 100%;
-
     margin-bottom: 0;
   }
 
   &__director {
-    width: 100%;
-
     margin-bottom: 0;
   }
 
   &__actors {
-    width: 100%;
-
     margin-bottom: 0;
   }
 
@@ -80,8 +62,17 @@
     margin-bottom: 0;
   }
 
+  &__additional {
+    margin-top: 0;
+
+    font-size: 20px;
+    color: #008000;
+  }
+
   &__controls {
     width: 100%;
+
+    margin-top: auto;
 
     text-align: center;
   }

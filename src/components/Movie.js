@@ -16,6 +16,7 @@ export default function Movie(props) {
   const { movie, wishlistMovies } = props;
   const id = movie.imdbID;
   const isInWishlist = wishlistMovies.some(wishlistMovie => wishlistMovie.imdbID === id);
+  const additionalInfo = (isInWishlist) ? 'In wishlist' : null;
   const handleOpenMoviePopup = props.openMoviePopup.bind(null, id);
   const handleRemoveFromWishlist = props.removeFromWishlist.bind(null, id);
   const addOrRemoveBtn = (isInWishlist)
@@ -32,7 +33,10 @@ export default function Movie(props) {
 
   return (
     <li className="movie">
-      <MovieInfo {...movie}>
+      <MovieInfo
+        additionalInfo={additionalInfo}
+        {...movie}
+      >
         <Btn
           onClick={handleOpenMoviePopup}
           text={'More info'}
