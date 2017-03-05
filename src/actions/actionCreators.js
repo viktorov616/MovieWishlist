@@ -7,9 +7,10 @@ function addToWishlist(movie) {
   };
 }
 
-export function closeMoviePopup() {
+export function closePopup(name) {
   return {
-    type: 'CLOSE_MOVIE_POPUP',
+    type: 'CLOSE_POPUP',
+    name,
   };
 }
 
@@ -23,11 +24,19 @@ export function fetchMovies(query, page = 1) {
           response.json()
             .then((json) => {
               dispatch(receiveResponse());
+
+              if (json.Response === 'False') {
+                dispatch(setErrorMessage(json.Error));
+                dispatch(openPopup('displayErrorPopup'));
+                return;
+              }
+
               dispatch(receiveMovies(json, query, page));
             });
         } else {
           dispatch(receiveResponse());
-          // add error handler later
+          dispatch(setErrorMessage('Cannot load data from server.'));
+          dispatch(openPopup('displayErrorPopup'));
         }
       });
   };
@@ -47,7 +56,8 @@ function fetchMovie(id, ...functions) {
             });
         } else {
           dispatch(receiveResponse());
-          // add error handler later
+          dispatch(setErrorMessage('Cannot load data from server.'));
+          dispatch(openPopup('displayErrorPopup'));
         }
       });
   };
@@ -61,13 +71,15 @@ export function handleAddToWishlist(id) {
 
 export function handleOpenMoviePopup(id) {
   return (dispatch) => {
+    const openMoviePopup = openPopup.bind(null, 'displayMoviePopup');
     dispatch(fetchMovie(id, receiveMovie, openMoviePopup));
   };
 }
 
-function openMoviePopup() {
+export function openPopup(name) {
   return {
-    type: 'OPEN_MOVIE_POPUP',
+    type: 'OPEN_POPUP',
+    name,
   };
 }
 
@@ -104,6 +116,13 @@ export function removeFromWishlist(id) {
 function requestData() {
   return {
     type: 'REQUEST_DATA',
+  };
+}
+
+function setErrorMessage(message) {
+  return {
+    type: 'SET_ERROR_MESSAGE',
+    message,
   };
 }
 

@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 
+import ErrorPopup from '../components/ErrorPopup';
 import Btn from '../components/Btn';
 import MoviePopup from '../components/MoviePopup';
 import SearchBar from '../components/SearchBar';
@@ -14,7 +15,9 @@ export default function Search(props) {
     props.fetchMovies(query, page);
   }
 
-  const { displayMoviePopup, isFetching, movies, movie, totalResults } = props.search;
+  const {
+    displayErrorPopup, displayMoviePopup, errorMessage, isFetching, movies, movie, totalResults,
+  } = props.search;
   const movieAmount = movies.length;
   const loadMoreBtn = (movieAmount !== 0 && totalResults - movieAmount > 0)
     ? (<Btn
@@ -24,13 +27,18 @@ export default function Search(props) {
   const moviePopup = (displayMoviePopup)
     ? (<MoviePopup
       addToWishlist={props.handleAddToWishlist}
-      closeMoviePopup={props.closeMoviePopup}
+      closePopup={props.closePopup}
       movie={movie}
       removeFromWishlist={props.removeFromWishlist}
       wishlistMovies={props.wishlist.movies}
     />) : null;
   const spinLoader = (isFetching)
     ? <div className="search__spin-loader-container"><SpinLoader /></div> : null;
+  const errorPopup = (displayErrorPopup)
+    ? (<ErrorPopup
+      closePopup={props.closePopup}
+      errorMessage={errorMessage}
+    />) : null;
 
   return (
     <div className="search">
@@ -50,12 +58,13 @@ export default function Search(props) {
       { loadMoreBtn }
       { moviePopup }
       { spinLoader }
+      { errorPopup }
     </div>
   );
 }
 
 Search.propTypes = {
-  closeMoviePopup: PropTypes.func,
+  closePopup: PropTypes.func,
   fetchMovies: PropTypes.func,
   handleAddToWishlist: PropTypes.func,
   handleOpenMoviePopup: PropTypes.func,
@@ -74,7 +83,7 @@ Search.propTypes = {
 };
 
 Search.defaultProps = {
-  closeMoviePopup: () => {},
+  closePopup: () => {},
   fetchMovies: () => {},
   fetchMovie: () => {},
   handleAddToWishlist: () => {},

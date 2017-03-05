@@ -1,4 +1,4 @@
-.movie-popup {
+.error-popup {
   position: fixed;
   left: 0;
   top: 0;
@@ -11,27 +11,40 @@
   &__inner {
     position: absolute;
     top: 150px;
-    left: 5%;
+    left: 38%;
 
-    display: flex;
+    width: 26%;
 
-    width: 90%;
-    min-height: 400px;
-
-    padding: 20px 10px;
-    padding-right: 40px;
+    padding: 0 20px;
+    padding-bottom: 20px;
 
     border: 1px solid $primary-color;
 
     background: #fff;
+
+    text-align: center;
+  }
+
+  &__header {
+    display: inline-block;
+    vertical-align: top;
+
+    margin: 0;
+    margin-top: 10px;
+
+    border-bottom: 1px solid red;
+
+    color: red;
+  }
+
+  &__text {
+    font-size: 18px;
   }
 
   &__btn-close {
     position: absolute;
-    top: 15px;
+    top: 20px;
     right: 15px;
-
-    fill: #000;
 
     cursor: pointer;
 
