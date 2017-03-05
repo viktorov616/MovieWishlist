@@ -37,7 +37,7 @@ function fetchMovie(id, ...functions) {
   return (dispatch) => {
     dispatch(requestData());
 
-    return fetch(`http://www.omdbapi.com/?i=${id}&plot=full`)
+    return fetch(`http://www.omdbapi.com/?i=${id}`)
       .then((response) => {
         if (response.ok) {
           response.json()

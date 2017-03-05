@@ -4,6 +4,7 @@ import Btn from '../components/Btn';
 import MoviePopup from '../components/MoviePopup';
 import SearchBar from '../components/SearchBar';
 import SearchResults from '../components/SearchResults';
+import SpinLoader from '../components/SpinLoader';
 
 export default function Search(props) {
   function handleLoadMore() {
@@ -13,7 +14,7 @@ export default function Search(props) {
     props.fetchMovies(query, page);
   }
 
-  const { displayMoviePopup, movies, movie, totalResults } = props.search;
+  const { displayMoviePopup, isFetching, movies, movie, totalResults } = props.search;
   const movieAmount = movies.length;
   const loadMoreBtn = (movieAmount !== 0 && totalResults - movieAmount > 0)
     ? (<Btn
@@ -28,6 +29,8 @@ export default function Search(props) {
       removeFromWishlist={props.removeFromWishlist}
       wishlistMovies={props.wishlist.movies}
     />) : null;
+  const spinLoader = (isFetching)
+    ? <div className="search__spin-loader-container"><SpinLoader /></div> : null;
 
   return (
     <div className="search">
@@ -46,6 +49,7 @@ export default function Search(props) {
       />
       { loadMoreBtn }
       { moviePopup }
+      { spinLoader }
     </div>
   );
 }
