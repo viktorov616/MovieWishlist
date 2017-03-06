@@ -10,12 +10,15 @@ export default function MovieList(props) {
 
   return (
     <ul className="movie-list">
-      { props.movies.map(movie => (<WishlistMovie
-        key={movie.imdbID}
-        removeFromWishlist={props.removeFromWishlist}
-        movie={movie}
-        toggleMovie={handleToggleMovie}
-      />)) }
+      { props.movies.map((movie) => {
+        if (!props.showWatched && movie.watched) return null;
+        return (<WishlistMovie
+          key={movie.imdbID}
+          removeFromWishlist={props.removeFromWishlist}
+          movie={movie}
+          toggleMovie={handleToggleMovie}
+        />);
+      }) }
     </ul>
   );
 }

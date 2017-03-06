@@ -20,7 +20,7 @@ export default function WishlistMovie(props) {
         />
         <Btn
           onClick={handleRemoveFromWishlist}
-          text={'Delete'}
+          text={'Remove'}
         />
       </MovieExtendedInfo>
     </li>

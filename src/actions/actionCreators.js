@@ -113,6 +113,12 @@ export function removeFromWishlist(id) {
   };
 }
 
+export function removeWatched() {
+  return {
+    type: 'REMOVE_WATCHED',
+  };
+}
+
 function requestData() {
   return {
     type: 'REQUEST_DATA',
@@ -138,5 +144,11 @@ export function toggleMovie(i) {
   return {
     type: 'TOGGLE_MOVIE',
     i,
+  };
+}
+
+export function toggleShowWatched() {
+  return {
+    type: 'TOGGLE_SHOW_WATCHED',
   };
 }
