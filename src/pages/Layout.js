@@ -9,6 +9,9 @@ export default function Layout(props) {
   }, {
     linkPath: '/search',
     linkName: 'Search',
+  }, {
+    linkPath: '/manual-add',
+    linkName: 'Manual Add',
   }];
 
   return (

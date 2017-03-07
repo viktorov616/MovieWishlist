@@ -5,7 +5,7 @@ import Btn from './Btn';
 import MovieExtendedInfo from './MovieExtendedInfo';
 
 export default function WishlistMovie(props) {
-  const { imdbID: id, watched } = props.movie;
+  const { id, watched } = props.movie;
   const handleRemoveFromWishlist = props.removeFromWishlist.bind(null, id);
   const handleToggleMovie = props.toggleMovie.bind(null, id);
   const movieClass = classNames('wishlist-movie', { 'wishlist-movie--watched': watched });

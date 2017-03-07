@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import shortid from 'shortid';
 
 import ErrorPopup from '../components/ErrorPopup';
 import Btn from '../components/Btn';
@@ -15,6 +16,12 @@ export default function Search(props) {
     props.fetchMovies(query, page);
   }
 
+  function addToWishlist(imdbID) {
+    const id = shortid.generate();
+
+    props.handleAddToWishlist(imdbID, id);
+  }
+
   const {
     displayErrorPopup, displayMoviePopup, errorMessage, isFetching, movies, movie, totalResults,
   } = props.search;
@@ -26,7 +33,7 @@ export default function Search(props) {
     />) : null;
   const moviePopup = (displayMoviePopup)
     ? (<MoviePopup
-      addToWishlist={props.handleAddToWishlist}
+      addToWishlist={addToWishlist}
       closePopup={props.closePopup}
       movie={movie}
       removeFromWishlist={props.removeFromWishlist}
@@ -49,7 +56,7 @@ export default function Search(props) {
         search={props.fetchMovies}
       />
       <SearchResults
-        addToWishlist={props.handleAddToWishlist}
+        addToWishlist={addToWishlist}
         movies={props.search.movies}
         openMoviePopup={props.handleOpenMoviePopup}
         removeFromWishlist={props.removeFromWishlist}

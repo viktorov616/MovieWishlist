@@ -5,11 +5,12 @@ import * as actionCreators from '../actions/actionCreators';
 import Layout from './Layout';
 
 function mapStateToProps(state) {
-  const { search, wishlist } = state;
+  const { search, wishlist, manualAdd } = state;
 
   return {
     search,
     wishlist,
+    manualAdd,
   };
 }
 

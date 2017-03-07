@@ -4,7 +4,7 @@ import WishlistMovie from './WishlistMovie';
 
 export default function MovieList(props) {
   function handleToggleMovie(id) {
-    const i = props.movies.map(movie => movie.imdbID).indexOf(id);
+    const i = props.movies.map(movie => movie.id).indexOf(id);
     props.toggleMovie(i);
   }
 
@@ -13,7 +13,7 @@ export default function MovieList(props) {
       { props.movies.map((movie) => {
         if (!props.showWatched && movie.watched) return null;
         return (<WishlistMovie
-          key={movie.imdbID}
+          key={movie.id}
           removeFromWishlist={props.removeFromWishlist}
           movie={movie}
           toggleMovie={handleToggleMovie}

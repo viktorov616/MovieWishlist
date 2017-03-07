@@ -10,6 +10,7 @@ export default function Btn(props) {
     <button
       onClick={props.onClick}
       className={btnClass}
+      type={props.type}
     >
       { props.text }
     </button>
@@ -19,9 +20,11 @@ export default function Btn(props) {
 Btn.propTypes = {
   onClick: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
+  type: PropTypes.string,
   mods: PropTypes.array,
 };
 
 Btn.defaultProps = {
+  type: 'button',
   mods: [],
 };

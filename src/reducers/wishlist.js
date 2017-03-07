@@ -7,14 +7,14 @@ const defaultState = {
 export default function wishlist(state = defaultState, action) {
   switch (action.type) {
     case 'ADD_TO_WISHLIST': {
-      const newMovie = Object.assign({}, action.movie, { watched: false });
+      const newMovie = Object.assign({}, action.movie, { id: action.id, watched: false });
       const newMovies = state.movies.concat(newMovie);
       localStorage.setItem('movies', JSON.stringify(newMovies));
 
       return Object.assign({}, state, { movies: newMovies });
     }
     case 'REMOVE_FROM_WISHLIST': {
-      const newMovies = state.movies.filter(movie => movie.imdbID !== action.id);
+      const newMovies = state.movies.filter(movie => movie.id !== action.id);
       localStorage.setItem('movies', JSON.stringify(newMovies));
 
       return Object.assign({}, state, {

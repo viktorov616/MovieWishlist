@@ -1,8 +1,9 @@
 import fetch from 'isomorphic-fetch';
 
-function addToWishlist(movie) {
+export function addToWishlist(id, movie) {
   return {
     type: 'ADD_TO_WISHLIST',
+    id,
     movie,
   };
 }
@@ -42,11 +43,11 @@ export function fetchMovies(query, page = 1) {
   };
 }
 
-function fetchMovie(id, ...functions) {
+function fetchMovie(imdbID, ...functions) {
   return (dispatch) => {
     dispatch(requestData());
 
-    return fetch(`http://www.omdbapi.com/?i=${id}`)
+    return fetch(`http://www.omdbapi.com/?i=${imdbID}`)
       .then((response) => {
         if (response.ok) {
           response.json()
@@ -63,16 +64,18 @@ function fetchMovie(id, ...functions) {
   };
 }
 
-export function handleAddToWishlist(id) {
+export function handleAddToWishlist(imdbID, id) {
+  const handleAddToWishList = addToWishlist.bind(null, id);
+
   return (dispatch) => {
-    dispatch(fetchMovie(id, addToWishlist));
+    dispatch(fetchMovie(imdbID, handleAddToWishList));
   };
 }
 
-export function handleOpenMoviePopup(id) {
+export function handleOpenMoviePopup(imdbID) {
   return (dispatch) => {
     const openMoviePopup = openPopup.bind(null, 'displayMoviePopup');
-    dispatch(fetchMovie(id, receiveMovie, openMoviePopup));
+    dispatch(fetchMovie(imdbID, receiveMovie, openMoviePopup));
   };
 }
 

@@ -44,7 +44,6 @@ MovieExtendedInfo.propTypes = {
   Plot: PropTypes.string.isRequired,
   additionalInfo: PropTypes.string,
   children: PropTypes.node,
-  imdbID: PropTypes.string.isRequired,
   imdbRating: PropTypes.string.isRequired,
 };
 

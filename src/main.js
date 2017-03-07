@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 
 import App from './pages/App';
+import ManualAdd from './pages/ManualAdd';
 import Search from './pages/Search';
 import Wishlist from './pages/Wishlist';
 
@@ -17,6 +18,7 @@ const router = (
       <Route path="/" component={App}>
         <IndexRoute component={Wishlist} />
         <Route path="/search" component={Search} />
+        <Route path="/manual-add" component={ManualAdd} />
       </Route>
     </Router>
   </Provider>

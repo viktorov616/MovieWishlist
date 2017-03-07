@@ -9,7 +9,7 @@ $masksColor       : #fff;
 $middleCircleSize : 68%;
 
 @mixin animation ($params) {
-  animation:$params;
+  animation: $params;
 }
 
 .spin {
