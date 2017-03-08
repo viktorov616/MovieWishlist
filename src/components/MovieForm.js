@@ -2,14 +2,18 @@ import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import Btn from './Btn';
+import RenderField from './RenderField';
 
 function MovieForm(props) {
   return (
     <form onSubmit={props.handleSubmit} className="movie-form">
-      <div className="movie-form__field-group">
-        <label className="movie-form__label" htmlFor="Title">Title:</label>
-        <Field className="movie-form__field" name="Title" component="input" type="text" />
-      </div>
+      <Field
+        className="movie-form"
+        name="Title"
+        component={RenderField}
+        type="text"
+        label={'Title:'}
+      />
       <div className="movie-form__field-group">
         <label className="movie-form__label" htmlFor="Genre">Genre:</label>
         <Field className="movie-form__field" name="Genre" component="input" type="text" />
@@ -65,8 +69,19 @@ MovieForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 };
 
+function validate(values) {
+  const errors = {};
+
+  if (!values.Title) {
+    errors.Title = 'Required';
+  }
+
+  return errors;
+}
+
 const movieForm = reduxForm({
   form: 'movie',
+  validate,
 })(MovieForm);
 
 export default movieForm;

@@ -7,7 +7,7 @@
   &__field-group {
     display: flex;
     flex: 0 0 100%;
-    align-items: center;
+    align-items: flex-start;
 
     margin-bottom: 10px;
 
@@ -34,13 +34,50 @@
 
       box-shadow: inset 0 0 3px rgba(196, 164, 49, .6);
     }
+
+    &--error {
+      border-color: #b00000;
+    }
   }
 
   &__label {
     flex: 0 0 150px;
 
+    margin-top: 10px;
+
     &--padding {
       padding-left: 15px;
+    }
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+  }
+
+  &__validation-notice {
+    position: relative;
+
+    margin: 5px 0;
+    padding: 3px 0;
+    padding-left: 30px;
+
+    font-size: 16px;
+    color: #b00000;
+
+    &:after {
+      content: '';
+
+      position: absolute;
+      left: 5px;
+      top: 2px;
+
+      width: 20px;
+      height: 20px;
+
+      background: url("img/exclamation-mark.svg");
+      background-size: 100%;
     }
   }
 
