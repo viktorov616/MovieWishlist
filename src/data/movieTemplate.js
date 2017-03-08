@@ -8,6 +8,7 @@ const movieTemplate = {
   Released: 'N/A',
   Runtime: 'N/A',
   Title: 'N/A',
+  imdbID: 'N/A',
   imdbRating: 'N/A',
 };
 

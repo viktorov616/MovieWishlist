@@ -7,6 +7,10 @@ const defaultState = {
 export default function wishlist(state = defaultState, action) {
   switch (action.type) {
     case 'ADD_TO_WISHLIST': {
+      if (state.movies.some(movie => movie.imdbID === action.movie.imdbID)) {
+        return state;
+      }
+
       const newMovie = Object.assign({}, action.movie, { id: action.id, watched: false });
       const newMovies = state.movies.concat(newMovie);
       localStorage.setItem('movies', JSON.stringify(newMovies));
