@@ -1,5 +1,7 @@
 const data = JSON.parse(localStorage.getItem('movies')) || [];
 const defaultState = {
+  displayBtnUp: false,
+  id: 'wishlist',
   movies: data,
   showWatched: true,
 };
@@ -17,6 +19,12 @@ export default function wishlist(state = defaultState, action) {
 
       return Object.assign({}, state, { movies: newMovies });
     }
+    case 'HIDE_BTN_UP':
+      if (action.id !== state.id) {
+        return state;
+      }
+
+      return Object.assign({}, state, { displayBtnUp: false });
     case 'REMOVE_FROM_WISHLIST': {
       const newMovies = state.movies.filter(movie => movie.id !== action.id);
       localStorage.setItem('movies', JSON.stringify(newMovies));
@@ -33,6 +41,12 @@ export default function wishlist(state = defaultState, action) {
         movies: newMovies,
       });
     }
+    case 'SHOW_BTN_UP':
+      if (action.id !== state.id) {
+        return state;
+      }
+
+      return Object.assign({}, state, { displayBtnUp: true });
     case 'TOGGLE_MOVIE': {
       const { i } = action;
       const { movies } = state;

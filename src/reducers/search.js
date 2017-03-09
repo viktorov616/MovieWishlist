@@ -1,8 +1,10 @@
 const defaultState = {
   currentPage: 1,
+  displayBtnUp: false,
   displayErrorPopup: false,
   displayMoviePopup: false,
   errorMessage: '',
+  id: 'search',
   isFetching: false,
   lastQuery: '',
   movies: [],
@@ -19,6 +21,12 @@ export default function search(state = defaultState, action) {
       }
 
       return Object.assign({}, state, { [action.name]: false });
+    case 'HIDE_BTN_UP':
+      if (action.id !== state.id) {
+        return state;
+      }
+
+      return Object.assign({}, state, { displayBtnUp: false });
     case 'OPEN_POPUP':
       if (!(action.name in state)) {
         return state;
@@ -62,6 +70,12 @@ export default function search(state = defaultState, action) {
 
       return Object.assign({}, state, { [inputName]: value });
     }
+    case 'SHOW_BTN_UP':
+      if (action.id !== state.id) {
+        return state;
+      }
+
+      return Object.assign({}, state, { displayBtnUp: true });
     default:
       return state;
   }

@@ -79,6 +79,13 @@ export function handleOpenMoviePopup(imdbID) {
   };
 }
 
+export function hideBtnUp(id) {
+  return {
+    type: 'HIDE_BTN_UP',
+    id,
+  };
+}
+
 export function openPopup(name) {
   return {
     type: 'OPEN_POPUP',
@@ -140,6 +147,13 @@ export function setInputValue(inputName, value) {
     type: 'SET_INPUT_VALUE',
     inputName,
     value,
+  };
+}
+
+export function showBtnUp(id) {
+  return {
+    type: 'SHOW_BTN_UP',
+    id,
   };
 }
 

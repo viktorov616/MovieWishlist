@@ -1,10 +1,13 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
+import debouce from '../utility/debouce';
+
+import BtnUp from '../components/BtnUp';
 import MovieList from '../components/MovieList';
 import WishlistControls from '../components/WishlistControls';
 
-export default function Wishlist(props) {
-  function computeTitleText(movies) {
+export default class Wishlist extends Component {
+  static computeTitleText(movies) {
     const unwatchedMovies = movies.filter(movie => !movie.watched).length;
     let text;
 
@@ -20,46 +23,84 @@ export default function Wishlist(props) {
 
     return text;
   }
-  const { movies, showWatched } = props.wishlist;
-  const titleText = computeTitleText(movies);
-  const wishlistControls = (movies.length !== 0)
-    ? (<WishlistControls
-      removeWatched={props.removeWatched}
-      showWatched={showWatched}
-      toggleShowWatched={props.toggleShowWatched}
-    />) : null;
 
-  return (
-    <div className="wishlist">
-      <h1 className="wishlist__title">{ titleText }</h1>
-      { wishlistControls }
-      <MovieList
-        removeFromWishlist={props.removeFromWishlist}
-        movies={movies}
+  constructor(props) {
+    super(props);
+
+    this.checkScrollPosition = debouce(this.checkScrollPosition.bind(this), 10);
+  }
+
+  componentWillMount() {
+    window.addEventListener('scroll', this.checkScrollPosition);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.checkScrollPosition);
+  }
+
+  checkScrollPosition() {
+    const id = this.props.wishlist.id;
+
+    if (window.pageYOffset > 150 && !this.props.wishlist.displayBtnUp) {
+      this.props.showBtnUp(id);
+    } else if (window.pageYOffset < 150 && this.props.wishlist.displayBtnUp) {
+      this.props.hideBtnUp(id);
+    }
+  }
+
+  render() {
+    const { props } = this;
+    const { displayBtnUp, movies, showWatched } = props.wishlist;
+    const titleText = this.constructor.computeTitleText(movies);
+    const btnUp = (displayBtnUp) ? <BtnUp hideBtnUp={props.hideBtnUp} /> : null;
+    const wishlistControls = (movies.length !== 0)
+      ? (<WishlistControls
+        removeWatched={props.removeWatched}
         showWatched={showWatched}
-        toggleMovie={props.toggleMovie}
-      />
-    </div>
-  );
+        toggleShowWatched={props.toggleShowWatched}
+      />) : null;
+
+    return (
+      <div className="wishlist">
+        <h1 className="wishlist__title">{ titleText }</h1>
+        { wishlistControls }
+        <MovieList
+          removeFromWishlist={props.removeFromWishlist}
+          movies={movies}
+          showWatched={showWatched}
+          toggleMovie={props.toggleMovie}
+        />
+        { btnUp }
+      </div>
+    );
+  }
 }
 
 Wishlist.propTypes = {
+  hideBtnUp: PropTypes.func,
   removeFromWishlist: PropTypes.func,
   removeWatched: PropTypes.func,
+  showBtnUp: PropTypes.func,
   toggleMovie: PropTypes.func,
   toggleShowWatched: PropTypes.func,
   wishlist: PropTypes.shape({
+    displayBtnUp: PropTypes.bool,
+    id: PropTypes.string,
     movies: PropTypes.array,
     showWatched: PropTypes.bool,
   }),
 };
 
 Wishlist.defaultProps = {
+  hideBtnUp: () => {},
   removeFromWishlist: () => {},
   removeWatched: () => {},
+  showBtnUp: () => {},
   toggleMovie: () => {},
   toggleShowWatched: () => {},
   wishlist: {
+    displayBtnUp: false,
+    id: '',
     movies: [],
     showWatched: true,
   },
