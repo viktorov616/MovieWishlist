@@ -33,16 +33,22 @@ function MovieForm(props) {
         </label>
         <Field className="movie-form__field" name="Released" component="input" type="text" />
       </div>
-      <div className="movie-form__field-group">
-        <label className="movie-form__label" htmlFor="Metascore">Metascore:</label>
-        <Field className="movie-form__field" name="Metascore" component="input" type="text" />
-        <label
-          className="movie-form__label movie-form__label--padding"
-          htmlFor="imdbRating"
-        >
-          imdbRating:
-        </label>
-        <Field className="movie-form__field" name="imdbRating" component="input" type="text" />
+      <div className="movie-form__field-wrapper">
+        <Field
+          className="movie-form"
+          name="imdbRating"
+          component={RenderField}
+          type="text"
+          label={'imdbRating:'}
+        />
+        <Field
+          className="movie-form"
+          name="Metascore"
+          component={RenderField}
+          type="text"
+          label={'Metascore:'}
+          labelPadding={'true'}
+        />
       </div>
       <div className="movie-form__field-group">
         <label className="movie-form__label" htmlFor="Director">Director:</label>
@@ -67,6 +73,7 @@ function MovieForm(props) {
 
 MovieForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired,
 };
 
 function validate(values) {
@@ -74,6 +81,14 @@ function validate(values) {
 
   if (!values.Title) {
     errors.Title = 'Required';
+  }
+
+  if (values.imdbRating && /[\D]/.test(values.imdbRating)) {
+    errors.imdbRating = 'Only numbers is allowed';
+  }
+
+  if (values.Metascore && /[\D]/.test(values.Metascore)) {
+    errors.Metascore = 'Only numbers is allowed';
   }
 
   return errors;

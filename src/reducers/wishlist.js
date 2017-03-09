@@ -9,7 +9,9 @@ const defaultState = {
 export default function wishlist(state = defaultState, action) {
   switch (action.type) {
     case 'ADD_TO_WISHLIST': {
-      if (state.movies.some(movie => movie.imdbID === action.movie.imdbID)) {
+      const { imdbID } = action.movie;
+
+      if ((imdbID !== 'N/A') && (state.movies.some(movie => movie.imdbID === imdbID))) {
         return state;
       }
 
