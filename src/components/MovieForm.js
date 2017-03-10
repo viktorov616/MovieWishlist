@@ -6,7 +6,10 @@ import RenderField from './RenderField';
 
 function MovieForm(props) {
   return (
-    <form onSubmit={props.handleSubmit} className="movie-form">
+    <form
+      onSubmit={props.handleSubmit}
+      className="movie-form"
+    >
       <Field
         className="movie-form"
         name="Title"
@@ -74,6 +77,7 @@ function MovieForm(props) {
 MovieForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired,
+  submitSucceeded: PropTypes.bool.isRequired,
 };
 
 function validate(values) {
@@ -84,11 +88,11 @@ function validate(values) {
   }
 
   if (values.imdbRating && /[\D]/.test(values.imdbRating)) {
-    errors.imdbRating = 'Only numbers is allowed';
+    errors.imdbRating = 'Only numbers are allowed';
   }
 
   if (values.Metascore && /[\D]/.test(values.Metascore)) {
-    errors.Metascore = 'Only numbers is allowed';
+    errors.Metascore = 'Only numbers are allowed';
   }
 
   return errors;

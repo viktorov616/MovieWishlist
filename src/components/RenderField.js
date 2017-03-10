@@ -31,7 +31,7 @@ RenderField.propTypes = {
     name: PropTypes.string.isRequired,
     value: PropTypes.string,
   }).isRequired,
-  labelPadding: PropTypes.string.isRequired,
+  labelPadding: PropTypes.string,
   label: PropTypes.string.isRequired,
   meta: PropTypes.shape({
     error: PropTypes.string,
@@ -42,4 +42,8 @@ RenderField.propTypes = {
 
 RenderField.defaultProps = {
   className: '',
+};
+
+RenderField.defaultProps = {
+  labelPadding: '',
 };

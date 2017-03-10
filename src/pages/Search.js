@@ -3,9 +3,9 @@ import shortid from 'shortid';
 
 import debouce from '../utility/debouce';
 
-import ErrorPopup from '../components/ErrorPopup';
 import BtnUp from '../components/BtnUp';
 import Btn from '../components/Btn';
+import MessagePopup from '../components/MessagePopup';
 import MoviePopup from '../components/MoviePopup';
 import SearchBar from '../components/SearchBar';
 import SearchResults from '../components/SearchResults';
@@ -76,9 +76,12 @@ export default class Search extends Component {
     const spinLoader = (isFetching)
       ? <div className="search__spin-loader-container"><SpinLoader /></div> : null;
     const errorPopup = (displayErrorPopup)
-      ? (<ErrorPopup
+      ? (<MessagePopup
         closePopup={props.closePopup}
-        errorMessage={errorMessage}
+        header={'Error!'}
+        message={errorMessage}
+        mods={['error']}
+        popupName={'displayErrorPopup'}
       />) : null;
 
     return (
