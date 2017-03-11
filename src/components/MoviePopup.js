@@ -13,7 +13,7 @@ export default function MoviePopup(props) {
   const { imdbID } = movie;
   const isInWishlist = wishlistMovies.some(wishlistMovie => wishlistMovie.imdbID === imdbID);
   const additionalInfo = (isInWishlist) ? 'This movie is in the wishlist' : null;
-  const handleAddToWishlist = props.addToWishlist.bind(null, imdbID);
+  const handleAddToWishlist = props.addToWishlist.bind(null, imdbID, movie);
   const handleRemoveFromWishlist = props.removeFromWishlist.bind(null, imdbID);
   const closeMoviePopup = closePopup.bind(null, 'displayMoviePopup');
   const addOrRemoveBtn = (isInWishlist)

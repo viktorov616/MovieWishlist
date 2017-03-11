@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import shortid from 'shortid';
 
 import MessagePopup from '../components/MessagePopup';
@@ -28,7 +29,13 @@ export default function ManualAdd(props) {
   return (
     <div className="manual-add">
       <MovieForm onSubmit={handleSubmit} />
-      { submitSucceedPopup }
+      <ReactCSSTransitionGroup
+        transitionName="manual-add__succeed-popup--fade"
+        transitionEnterTimeout={200}
+        transitionLeaveTimeout={200}
+      >
+        { submitSucceedPopup }
+      </ReactCSSTransitionGroup>
     </div>
   );
 }

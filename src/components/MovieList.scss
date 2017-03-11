@@ -1,4 +1,26 @@
 .movie-list {
   margin: 0;
   padding: 0;
+
+  span > &__list-item {
+    &--fade-enter {
+      opacity: 0;
+    }
+
+    &--fade-enter-active {
+      opacity: 1;
+
+      transition: .6s ease-in all;
+    }
+
+    &--fade-leave {
+      opacity: 1;
+    }
+
+    &--fade-leave-active {
+      opacity: 0;
+
+      transition: .4s ease-out all;
+    }
+  }
 }

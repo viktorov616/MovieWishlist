@@ -10,19 +10,38 @@
 
   &--watched {
     background: rgba(179, 179, 179, .3);
+  }
 
-    &:after {
-      content: 'Watched';
+  &__watched-info {
+    position: absolute;
+    right: 5px;
+    top: 0;
 
-      position: absolute;
-      right: 5px;
-      top: 38px;
+    transform: rotate(30deg);
 
-      transform: rotate(30deg);
+    font-size: 38px;
+    font-weight: 700;
+    color: $secondary-color;
+  }
 
-      font-size: 38px;
-      font-weight: 700;
-      color: $secondary-color;
+  span > &__watched-info-wrapper {
+    &--fade-enter {
+      opacity: 0;
+    }
+    &--fade-enter-active {
+      opacity: 1;
+
+      transition: .2s ease-in all;
+    }
+
+    &--fade-leave {
+      opacity: 1;
+    }
+
+    &--fade-leave-active {
+      opacity: 0;
+
+      transition: .2s ease-out all;
     }
   }
 }

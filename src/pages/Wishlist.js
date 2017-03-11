@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import debouce from '../utility/debouce';
 
@@ -70,7 +71,13 @@ export default class Wishlist extends Component {
           showWatched={showWatched}
           toggleMovie={props.toggleMovie}
         />
-        { btnUp }
+        <ReactCSSTransitionGroup
+          transitionName="wishlist__btn-up--fade"
+          transitionEnterTimeout={100}
+          transitionLeaveTimeout={100}
+        >
+          { btnUp }
+        </ReactCSSTransitionGroup>
       </div>
     );
   }

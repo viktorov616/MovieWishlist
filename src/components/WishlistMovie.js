@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classNames from 'classnames';
 
 import Btn from './Btn';
@@ -10,6 +11,7 @@ export default function WishlistMovie(props) {
   const handleToggleMovie = props.toggleMovie.bind(null, id);
   const movieClass = classNames('wishlist-movie', { 'wishlist-movie--watched': watched });
   const markBtnText = (watched) ? 'Mark as unwatched' : 'Mark as watched';
+  const watchedInfo = (watched) ? <p className="wishlist-movie__watched-info">Watched</p> : null;
 
   return (
     <li className={movieClass}>
@@ -23,6 +25,13 @@ export default function WishlistMovie(props) {
           text={'Remove'}
         />
       </MovieExtendedInfo>
+      <ReactCSSTransitionGroup
+        transitionName="wishlist-movie__watched-info-wrapper--fade"
+        transitionEnterTimeout={200}
+        transitionLeaveTimeout={200}
+      >
+        { watchedInfo }
+      </ReactCSSTransitionGroup>
     </li>
   );
 }

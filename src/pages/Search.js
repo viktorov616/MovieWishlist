@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import shortid from 'shortid';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import debouce from '../utility/debouce';
 
@@ -15,7 +15,6 @@ export default class Search extends Component {
   constructor(props) {
     super(props);
 
-    this.addToWishlist = this.addToWishlist.bind(this);
     this.checkScrollPosition = debouce(this.checkScrollPosition.bind(this), 10);
     this.handleLoadMore = this.handleLoadMore.bind(this);
   }
@@ -46,12 +45,6 @@ export default class Search extends Component {
     props.fetchMovies(query, page);
   }
 
-  addToWishlist(imdbID) {
-    const id = shortid.generate();
-
-    this.props.handleAddToWishlist(imdbID, id);
-  }
-
   render() {
     const { props } = this;
     const {
@@ -74,7 +67,7 @@ export default class Search extends Component {
         wishlistMovies={props.wishlist.movies}
       />) : null;
     const spinLoader = (isFetching)
-      ? <div className="search__spin-loader-container"><SpinLoader /></div> : null;
+      ? <SpinLoader /> : null;
     const errorPopup = (displayErrorPopup)
       ? (<MessagePopup
         closePopup={props.closePopup}
@@ -93,17 +86,42 @@ export default class Search extends Component {
           search={props.fetchMovies}
         />
         <SearchResults
-          addToWishlist={this.addToWishlist}
+          addToWishlist={props.handleAddToWishlist}
           movies={props.search.movies}
           openMoviePopup={props.handleOpenMoviePopup}
           removeFromWishlist={props.removeFromWishlist}
           wishlistMovies={props.wishlist.movies}
         />
-        { btnUp }
+        <ReactCSSTransitionGroup
+          transitionName="search__btn-up--fade"
+          transitionEnterTimeout={100}
+          transitionLeaveTimeout={100}
+        >
+          { btnUp }
+        </ReactCSSTransitionGroup>
         { loadMoreBtn }
-        { moviePopup }
-        { spinLoader }
-        { errorPopup }
+        <ReactCSSTransitionGroup
+          transitionName="search__movie-popup--slide"
+          transitionEnterTimeout={400}
+          transitionLeaveTimeout={300}
+        >
+          { moviePopup }
+        </ReactCSSTransitionGroup>
+        <ReactCSSTransitionGroup
+          className="search__spin-loader-container"
+          transitionName="search__spin-loader--fade"
+          transitionEnterTimeout={100}
+          transitionLeaveTimeout={100}
+        >
+          { spinLoader }
+        </ReactCSSTransitionGroup>
+        <ReactCSSTransitionGroup
+          transitionName="search__error-popup--fade"
+          transitionEnterTimeout={400}
+          transitionLeaveTimeout={300}
+        >
+          { errorPopup }
+        </ReactCSSTransitionGroup>
       </div>
     );
   }

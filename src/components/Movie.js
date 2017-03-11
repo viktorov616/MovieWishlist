@@ -5,11 +5,6 @@ import MovieInfo from './MovieInfo';
 
 export default function Movie(props) {
   function handleAddToWishlist() {
-    const isInWishlist = wishlistMovies.some(wishlistMovie => wishlistMovie.imdbID === id);
-    if (isInWishlist) {
-      return;
-    }
-
     props.addToWishlist(id);
   }
 

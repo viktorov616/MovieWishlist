@@ -64,7 +64,7 @@ function fetchMovie(imdbID, ...functions) {
   };
 }
 
-export function handleAddToWishlist(imdbID, id) {
+export function handleAddToWishlist(imdbID, id = imdbID) {
   const handleAddToWishList = addToWishlist.bind(null, id);
 
   return (dispatch) => {
