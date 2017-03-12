@@ -10,7 +10,6 @@ export default function Btn(props) {
     <button
       onClick={props.onClick}
       className={btnClass}
-      ref={btn => (this.btn = btn)}
       type={props.type}
     >
       { props.text }
