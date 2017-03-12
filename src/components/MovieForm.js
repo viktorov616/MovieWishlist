@@ -67,7 +67,7 @@ function MovieForm(props) {
       </div>
       <Btn
         text={'Add movie'}
-        onClick={() => {}}
+        onClick={props.handleSubmit}
         type={'sumbit'}
       />
     </form>

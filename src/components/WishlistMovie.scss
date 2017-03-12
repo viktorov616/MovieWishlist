@@ -8,6 +8,8 @@
 
   list-style: none;
 
+  transition: background-color ease .2s;
+
   &--watched {
     background: rgba(179, 179, 179, .3);
   }

@@ -1,7 +1,7 @@
 .movie-extended-info {
   display: flex;
 
-  width: 100%;
+  flex-basis: 100%;
 
   &__poster {
     flex: 0 0 300px;
@@ -13,6 +13,7 @@
   &__desc {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
 
     padding: 0 10px;
   }

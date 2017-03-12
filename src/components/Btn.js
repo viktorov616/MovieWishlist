@@ -1,20 +1,33 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-export default function Btn(props) {
-  const btnDefaultClass = 'btn';
-  const btnClass = props.mods.reduce(
-    (result, mod) => result.concat(`${btnDefaultClass}--${mod}`), [btnDefaultClass],
-  ).join(' ');
+export default class Btn extends Component {
+  componentWillUpdate(nextProps) {
+    if (this.props.text !== nextProps.text) {
+      const { height } = getComputedStyle(this.btn);
+      this.btn.style.maxHeight = `${parseInt(height, 10) + 1000}px`;
 
-  return (
-    <button
-      onClick={props.onClick}
-      className={btnClass}
-      type={props.type}
-    >
-      { props.text }
-    </button>
-  );
+      console.log(height);
+    }
+  }
+
+  render() {
+    const { props } = this;
+    const btnDefaultClass = 'btn';
+    const btnClass = props.mods.reduce(
+      (result, mod) => result.concat(`${btnDefaultClass}--${mod}`), [btnDefaultClass],
+    ).join(' ');
+
+    return (
+      <button
+        onClick={props.onClick}
+        className={btnClass}
+        ref={btn => (this.btn = btn)}
+        type={props.type}
+      >
+        { props.text }
+      </button>
+    );
+  }
 }
 
 Btn.propTypes = {
