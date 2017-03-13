@@ -2,7 +2,7 @@
 
 This application allows you to fill out a wishlist of movies that you want to watch.
 
-Two ways of adding a movie into wishlist:
+Two ways to add a movie to the wishlist:
 * Search in the database;
 * Add manually.
 
