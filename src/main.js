@@ -15,10 +15,10 @@ import './style.scss';
 const router = (
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={App}>
+      <Route path="/MovieWishlist/" component={App}>
         <IndexRoute component={Wishlist} />
-        <Route path="/search" component={Search} />
-        <Route path="/manual-add" component={ManualAdd} />
+        <Route path="/MovieWishlist/search" component={Search} />
+        <Route path="/MovieWishlist/manual-add" component={ManualAdd} />
       </Route>
     </Router>
   </Provider>

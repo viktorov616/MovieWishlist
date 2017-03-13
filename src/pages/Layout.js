@@ -4,13 +4,13 @@ import Nav from '../components/Nav';
 
 export default function Layout(props) {
   const nav = [{
-    linkPath: '/',
+    linkPath: '/MovieWishlist/',
     linkName: 'Wishlist',
   }, {
-    linkPath: '/search',
+    linkPath: '/MovieWishlist/search',
     linkName: 'Search',
   }, {
-    linkPath: '/manual-add',
+    linkPath: '/MovieWishlist/manual-add',
     linkName: 'Manual Add',
   }];
 
