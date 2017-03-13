@@ -64,7 +64,13 @@ export default class Wishlist extends Component {
     return (
       <div className="wishlist">
         <h1 className="wishlist__title">{ titleText }</h1>
-        { wishlistControls }
+        <ReactCSSTransitionGroup
+          transitionName="wishlist__controls--fade"
+          transitionEnterTimeout={200}
+          transitionLeaveTimeout={200}
+        >
+          { wishlistControls }
+        </ReactCSSTransitionGroup>
         <MovieList
           removeFromWishlist={props.removeFromWishlist}
           movies={movies}
