@@ -19,7 +19,7 @@ export function fetchMovies(query, page = 1) {
   return (dispatch) => {
     dispatch(requestData());
 
-    return fetch(`http://www.omdbapi.com/?s=${query}&page=${page}`)
+    return fetch(`https://www.omdbapi.com/?s=${query}&page=${page}`)
       .then((response) => {
         if (response.ok) {
           response.json()
@@ -47,7 +47,7 @@ function fetchMovie(imdbID, ...functions) {
   return (dispatch) => {
     dispatch(requestData());
 
-    return fetch(`http://www.omdbapi.com/?i=${imdbID}`)
+    return fetch(`https://www.omdbapi.com/?i=${imdbID}`)
       .then((response) => {
         if (response.ok) {
           response.json()
