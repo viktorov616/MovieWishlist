@@ -6,7 +6,7 @@
 
   &__field-group {
     display: flex;
-    flex: 1 1 0;
+    flex: 1 1 100%;
     align-items: flex-start;
 
     min-width: 0;
@@ -18,7 +18,7 @@
   }
 
   &__field {
-    flex: 1 1 0;
+    flex: 1 1 100%;
 
     min-width: 0;
 

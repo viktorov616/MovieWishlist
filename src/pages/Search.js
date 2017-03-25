@@ -102,8 +102,8 @@ export default class Search extends Component {
         { loadMoreBtn }
         <ReactCSSTransitionGroup
           transitionName="search__movie-popup--slide"
-          transitionEnterTimeout={400}
-          transitionLeaveTimeout={300}
+          transitionEnterTimeout={600}
+          transitionLeaveTimeout={400}
         >
           { moviePopup }
         </ReactCSSTransitionGroup>

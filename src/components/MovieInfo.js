@@ -10,7 +10,9 @@ export default function MovieInfo(props) {
 
   return (
     <div className="movie-info">
-      <img src={poster} alt="Movie poster" className="movie-info__img" />
+      <div className="movie-info__img-wrapper">
+        <img src={poster} alt="Movie poster" className="movie-info__img" />
+      </div>
       <div className="movie-info__container">
         <div className="movie-info__desc">
           <p className="movie-info__title">{ props.Title }</p>
